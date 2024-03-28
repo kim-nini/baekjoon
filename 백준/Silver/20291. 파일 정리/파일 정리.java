@@ -12,11 +12,11 @@ public class Main {
         String s = bf.readLine();
 
         StringTokenizer st = new StringTokenizer(s);
-        int num = Integer.parseInt(st.nextToken());
+        int num = Integer.parseInt(st.nextToken()); // 파일개수
 
-        HashMap<String,Integer> map = new HashMap<>();
-        String[] tmp = new String[2];
+        TreeMap<String,Integer> map = new TreeMap<>(); // 확장자,갯수,정렬
 
+        String[] tmp = new String[2]; // split 용 temp 배열
         for(int i=0; i<num; i++){
             tmp = bf.readLine().split("\\.");
             if(map.containsKey(tmp[1])){
@@ -26,12 +26,9 @@ public class Main {
             }
         }
 
-        // 사전순서 정렬
-        Map<String,Integer> map2 = new TreeMap<>(map);
-        for(String key : map2.keySet()){
+        for(String key : map.keySet()){
             bw.write(key+" "+map.get(key)+"\n");
         }
-
 
 
         bw.flush();
