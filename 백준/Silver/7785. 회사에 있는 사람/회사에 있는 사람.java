@@ -19,11 +19,7 @@ public class Main{
         String[] tmp = new String[2]; // split 용 temp 배열
         for(int i=0; i<num; i++){
             tmp = bf.readLine().split(" ");
-            if(map.containsKey(tmp[0])){
-                map.replace(tmp[0],tmp[1]);
-            }else {
-                map.put(tmp[0],tmp[1]);
-            }
+           map.put(tmp[0],tmp[1]);            
         }
 
 
