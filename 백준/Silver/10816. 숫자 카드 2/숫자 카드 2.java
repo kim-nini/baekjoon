@@ -35,11 +35,7 @@ public class Main {
         st = new StringTokenizer(bf.readLine());
         for (int i = 0; i < m; i++) {
             String given = st.nextToken();
-            if (take.containsKey(given)) {
-                sb.append(take.get(given) + " ");
-            } else {
-                sb.append("0 ");
-            }
+            sb.append(take.getOrDefault(given,0) + " ");
         }
 
         sb.deleteCharAt(sb.length() - 1);
