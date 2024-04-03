@@ -39,8 +39,6 @@ public class Main {
                 }
                 poll = deque.pollLast();
                 sb.append(poll.seq+" ");
-            }else {
-                sb.append(poll.seq+" ");
             }
         }
 
