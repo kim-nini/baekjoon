@@ -1,40 +1,38 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
-public class Main {
+public class Main{
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
 
-        List<String> enter = new ArrayList<>();
+        Queue<String> enter = new ArrayDeque<>();
         for (int i = 0; i < N; i++) {
-            enter.add(br.readLine());
+            enter.offer(br.readLine());
         }
 
+        int cnt = 0; // 추월카운트
 
-        int cnt = 0;
-
-        List<String> out = new ArrayList<>();
+        Queue<Integer> out = new ArrayDeque<>(); // 나간 순서
         for (int i = 0; i < N; i++) {
-            String s = br.readLine();
-            int idx = enter.indexOf(s); // idx : enter 인덱스
-            out.add(s);
-            if (!check(enter, out, idx)) {//out리스트(내앞에 나온 차)에 enter(0부터 idx-1 까지)이 없으면 추월한 차임
-                cnt++;
-
+            String outCar = br.readLine();
+            // 나온차가 들어간 순서와 같으면
+            if(!outCar.isEmpty()&&enter.peek().equals(outCar)){
+                enter.poll(); // 들어간 차 빼기
+            }else { // 같지않으면
+                cnt++; // 카운트++
+                enter.remove(outCar); // 리스트에서 삭제
             }
+
         }
+        br.close();
         System.out.println(cnt);
     }
 
-    static boolean check(List<String> enter, List<String> out, int index) {
-        return out.containsAll(enter.subList(0, index));
-    }
+
 }
 
 
