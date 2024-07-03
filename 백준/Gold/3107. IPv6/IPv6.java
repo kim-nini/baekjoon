@@ -3,40 +3,33 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main {
-    // 2번 규칙 먼저 실행
-    public static void main(String[] args) throws Exception {
-         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+     public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String ip = br.readLine();
-        String ip2 = ip;
+
+        String expandedIp = expandIp(ip);
+        fullIp(expandedIp);
+
+    }
+
+    private static void fullIp(String ip) {
         StringBuilder sb = new StringBuilder();
-        if(ip2.contains("::")){
-            ip2 = ip2.replace("::",":"); // :: 없애주고
-            String[] arr2 = ip2.split(":"); // : 로 나눴을때 몇개인지 세보고
-            int i = arr2[0].equals("")||arr2[arr2.length-1].equals("") ? 9-arr2.length : 8 - arr2.length;
-//            if(arr2[0].equals("")||arr2[arr2.length-1].equals("")){
-//                int i = 9-arr2.length;
-//            }else {
-//                int i = 8 - arr2.length;
-//            }
-            ip= ip.replace("::",":0000:".repeat(i));
-        }
-
         String[] arr = ip.split(":");
-
-
-        for(String st : arr){
-            if (st.length()==1) {
-                sb.append("000"+st+":");
-            } else if (st.length()==2) {
-                sb.append("00"+st+":");
-            } else if (st.length()==3) {
-                sb.append("0"+st+":");
-            }else if (st.length()==4) {
-                sb.append(st+":");
-            }
+        for (String st : arr) {
+            if (st.isEmpty()) continue;
+            sb.append("0".repeat(4 - st.length())).append(st).append(":");
         }
+        sb.deleteCharAt(sb.length() - 1);
+        System.out.println(sb);
+    }
 
-        sb.deleteCharAt(sb.length()-1);
-        System.out.println(sb.toString());
+    private static String expandIp(String ip) {
+        if (ip.contains("::")) {
+            String tmp = ip.replace("::", ":"); // :: 없애주고
+            String[] arr = tmp.split(":"); // : 로 나눴을때 몇개인지 세보고
+            int i = arr[0].isEmpty() || arr[arr.length - 1].isEmpty() ? 9 - arr.length : 8 - arr.length;
+            ip = ip.replace("::", ":0000".repeat(i) + ":");
+        }
+        return ip;
     }
 }
