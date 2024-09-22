@@ -2,33 +2,22 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Scanner;
 import java.util.StringTokenizer;
 
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        String s = bf.readLine();
-
-        // 단어 카운트
-        int cnt = 0;
-
-        String[] answer = s.split(" ");
-
-        for(String str : answer){
-            // 공백 삭제
-            str.replaceAll(" ","");
-            // 단어인 경우 cnt++
-            cnt += str.isEmpty() ? 0 : 1;
+          BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String s = br.readLine();
+        int cnt = s.length() - s.replaceAll(" ","").length();
+        if (s.charAt(0)==' ' && s.charAt(s.length()-1)==' '){
+            System.out.print(cnt-1);
+        }else if(s.charAt(0)==' ' || s.charAt(s.length()-1)==' '){
+            System.out.print(cnt);
+        }else {
+            System.out.println(cnt+1);
         }
-
-        bw.write(cnt+"");
-        bw.flush();
-        bw.close();
-
 
     }
 }
