@@ -1,4 +1,3 @@
-
 import java.io.*;
 import java.util.*;
 
@@ -21,22 +20,15 @@ public class Main {
 
     }
     static void numberOfCases(){
-        int left = 0, right = 0, count = 0;
-        int sum = arr[left];
-        while (left<=right){
-            if ( sum >= M){
-                count = sum==M ? count+1 : count;
+        int left = 0, right = 0, count = 0, sum = 0;
+        while (right < N) {
+            sum += arr[right++];
+            while (sum >= M) {
+                if (sum == M) count++; 
                 sum -= arr[left++];
-            } else {
-                if (++right>=N) break;
-                sum += arr[right];
             }
-            if(left>right){
-                if (++right>=N) break;
-                sum += arr[right];
-            }
-
         }
+
         System.out.print(count);
     }
 }
