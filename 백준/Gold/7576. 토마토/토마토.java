@@ -62,7 +62,7 @@ public class Main {
             count++;
         }
 
-        answer = count>0 ? Math.max(answer, count-1) : Math.max(answer, count);
+              answer = Math.max(answer,count-1);
     }
 
 
